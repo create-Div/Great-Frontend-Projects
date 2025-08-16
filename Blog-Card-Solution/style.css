@@ -1,0 +1,214 @@
+@layer reset, base, components, utilities;
+
+@layer reset {
+  /* Box sizing rules */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Prevent font size inflation */
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  /* Remove default margin in favour of better control in authored CSS */
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin-block-end: 0;
+  }
+
+  /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+  ul[role="list"],
+  ol[role="list"] {
+    list-style: none;
+  }
+
+  /* Set core body defaults */
+  body {
+    min-height: 100dvh;
+    line-height: 1.5;
+  }
+
+  /* Set shorter line heights on headings and interactive elements */
+  h1,
+  h2,
+  h3,
+  h4,
+  button,
+  input,
+  label {
+    line-height: 1.1;
+  }
+
+  /* Balance text wrapping on headings */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  /* A elements that don't have a class get default styles */
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+  }
+
+  /* Make images easier to work with */
+  img,
+  picture {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  /* Make sure textareas without a rows attribute are not tiny */
+  textarea:not([rows]) {
+    min-height: 10em;
+  }
+
+  /* Anything that has been anchored to should have extra scroll margin */
+  :target {
+    scroll-margin-block: 5ex;
+  }
+}
+
+@layer base {
+  :root {
+    --color-primary: hsl(0, 0%, 100%);
+    --color-text-primary: hsl(0, 0%, 32%);
+    --color-text-secondary: hsl(0, 0%, 9%);
+    --color-bg: linear-gradient(hsl(210, 20%, 98%), hsl(213, 11%, 84%));
+
+    --link-text-accent: hsl(245, 58%, 51%);
+    --link-color-hover: hsl(244, 55%, 41%);
+    --link-color-disabled: hsl(0, 0%, 64%);
+    --badge-bg-primary: hsl(138, 76%, 97%);
+    --badge-text-primary: hsl(142, 72%, 29%);
+    --badge-border-color: hsl(141, 79%, 85%);
+  }
+
+  body {
+    background: var(--color-bg);
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--link-text-accent);
+    font-weight: 500;
+    align-items: center;
+    display: inline-flex;
+    gap: 8px;
+
+    &:hover {
+      color: var(--link-color-hover);
+      transition: fill 0.4s ease;
+
+      svg {
+        fill: var(--link-color-hover);
+      }
+    }
+
+    &[aria-disabled="true"] {
+      color: var(--link-color-disabled);
+      pointer-events: none;
+
+      svg {
+        fill: var(--link-color-disabled);
+      }
+    }
+
+    svg {
+      fill: var(--link-text-accent);
+      transition: fill 0.4s ease;
+    }
+  }
+
+  img {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 288px;
+    object-fit: cover;
+  }
+
+  svg {
+    transition: all 0.4s ease;
+  }
+}
+
+@layer components {
+  article {
+    width: 340px;
+    background-color: var(--color-primary);
+    margin: 120px auto;
+    border-radius: 8px;
+    & .content {
+      padding: 24px 16px;
+      font-size: 1rem;
+    }
+    h2 {
+      font-size: 1.125rem;
+      margin-top: 8px;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+    span {
+      background-color: var(--badge-bg-primary);
+      border: 1px solid var(--badge-border-color);
+      color: var(--badge-text-primary);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.875rem;
+      text-align: center;
+      text-transform: capitalize;
+    }
+    p {
+      margin-top: 12px;
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+    a {
+      margin-top: 24px;
+    }
+  }
+}
+
+@layer utilities {
+  .container {
+    width: 100%;
+    min-width: 375px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-inline: 17.5px;
+  }
+}
